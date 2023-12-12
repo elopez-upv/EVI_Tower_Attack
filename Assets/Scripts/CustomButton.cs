@@ -15,6 +15,7 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private AudioSource source;
     [SerializeField] private Canvas canvasToHide;
     [SerializeField] private Canvas canvasToShow;
+    [SerializeField] private GameObject game;
     
     public void Start() {
         canvasToShow.enabled=false;
@@ -33,8 +34,14 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     public void OnClick() {
+        StartCoroutine(WaitAndLoadScene());
+    }
+
+    IEnumerator WaitAndLoadScene() {
+        yield return new WaitForSeconds(1f);
         canvasToHide.enabled=false;
         canvasToShow.enabled=true;
+        game.SetActive(true);
         EnemySpawner.onGameStart.Invoke();
     }
 }

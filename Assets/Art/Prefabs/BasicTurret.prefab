@@ -376,7 +376,7 @@ MonoBehaviour:
   rangeArea: {fileID: 5572022809047560813}
   targetingRange: 2
   rotationSpeed: 200
-  bulletsPerSecond: 1
+  bulletsPerSecond: 4
   baseUpgradeCost: 100
 --- !u!1 &5572022809047560813
 GameObject:

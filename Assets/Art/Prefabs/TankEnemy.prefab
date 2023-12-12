@@ -523,6 +523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662f86dced4463640906cdb629469e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 2
+  hitPoints: 24
   currencyWorth: 100
   healthBar: {fileID: 1186297791549200768}
