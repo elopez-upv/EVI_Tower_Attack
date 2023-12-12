@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [Header("Attributes")]
+    [SerializeField] private int baseCurrency = 100;
+
     public static LevelManager main;
 
     public Transform startPoint;
@@ -16,7 +19,7 @@ public class LevelManager : MonoBehaviour
     }
 
     private void Start() {
-        currency = 100;
+        currency = baseCurrency;
     }
 
     public void IncreaseCurrency(int amount) {
@@ -25,12 +28,14 @@ public class LevelManager : MonoBehaviour
 
     public bool SpendCurrency(int amount) {
         if (amount <= currency) {
-            //BUY item
             currency -= amount;
             return true;
         } else {
             Debug.Log("Not enough currency!");
             return false;
         }
+    }
+    public void SetCurrency(int amount) {
+        currency = amount;
     }
 }

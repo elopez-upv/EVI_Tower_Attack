@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class EnemySpawner : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private GameObject[] enemyPrefabs;
-
+    [SerializeField] private Canvas canvasToHide;
+    [SerializeField] private Canvas canvasToShow;
 
     [Header("Attributes")]
     [SerializeField] private int baseEnemies = 8;
@@ -16,9 +18,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float difficultyScalingFactor = 0.75f;
     [SerializeField] private float enemiesPerSecondCap = 15f;
 
-
     [Header("Events")]
     public static UnityEvent onEnemyDestroy = new UnityEvent();
+    public static UnityEvent onGameOver = new UnityEvent();
+    public static UnityEvent onGameStart = new UnityEvent();
 
     private int currentWave = 1;
     private float timeSinceLastSpawn;
@@ -30,10 +33,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Awake() {
         onEnemyDestroy.AddListener(EnemyDestroyed);
+        onGameOver.AddListener(GameOver);
+        onGameStart.AddListener(StartGame);
     }
 
     private void Start() {
-        StartCoroutine(StartWave());
     }
 
     private void Update() {
@@ -85,5 +89,31 @@ public class EnemySpawner : MonoBehaviour
 
     private float EnemiesPerSecond() {
         return Mathf.Clamp(enemiesPerSecond * Mathf.Pow(currentWave, difficultyScalingFactor), 0f, enemiesPerSecondCap);
+    }
+
+    private void GameOver() {
+        isSpawning = false;
+        clearGameItems();
+        Debug.Log("Game Ooooover!");
+        canvasToHide.enabled=false;
+        canvasToShow.enabled=true;
+    }
+
+    private void clearGameItems() {
+        GameObject[] allGameItems = GameObject.FindGameObjectsWithTag("gameItem");
+
+        foreach (GameObject gameItem in allGameItems)
+        {
+            Destroy(gameItem);
+        }
+    }
+
+    private void StartGame() {
+        Debug.Log("Starting game!");
+        enemiesAlive = 0;
+        enemiesLeftToSpawn = 0;
+        currentWave = 1;
+        timeSinceLastSpawn = 0f;
+        StartCoroutine(StartWave());
     }
 }

@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 8655131920951707380}
   m_Layer: 6
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: gameItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3057472642216837454}
-  moveSpeed: 2
+  moveSpeed: 6
 --- !u!114 &8655131920951707380
 MonoBehaviour:
   m_ObjectHideFlags: 0
