@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private GameObject[] enemyPrefabs;
     [SerializeField] private Canvas canvasToHide;
     [SerializeField] private Canvas canvasToShow;
+    [SerializeField] private GameObject game;
 
     [Header("Attributes")]
     [SerializeField] private int baseEnemies = 8;
@@ -97,6 +98,7 @@ public class EnemySpawner : MonoBehaviour
         Debug.Log("Game Ooooover!");
         canvasToHide.enabled=false;
         canvasToShow.enabled=true;
+        game.SetActive(false);
     }
 
     private void clearGameItems() {
@@ -114,6 +116,7 @@ public class EnemySpawner : MonoBehaviour
         enemiesLeftToSpawn = 0;
         currentWave = 1;
         timeSinceLastSpawn = 0f;
+        LevelManager.main.SetCurrency();
         StartCoroutine(StartWave());
     }
 }

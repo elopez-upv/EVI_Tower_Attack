@@ -35,7 +35,7 @@ public class LevelManager : MonoBehaviour
             return false;
         }
     }
-    public void SetCurrency(int amount) {
-        currency = amount;
+    public void SetCurrency() {
+        currency = baseCurrency;
     }
 }
