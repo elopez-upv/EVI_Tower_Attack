@@ -9036,11 +9036,13 @@ MonoBehaviour:
   - {fileID: 8530010831820088792, guid: dbd9edf6aac884a40950332ea591c32d, type: 3}
   - {fileID: 8530010831820088792, guid: 8af59f952e4c4034a889dbb6c4069004, type: 3}
   - {fileID: 8530010831820088792, guid: 8af59f952e4c4034a889dbb6c4069004, type: 3}
+  - {fileID: 8530010831820088792, guid: 8af59f952e4c4034a889dbb6c4069004, type: 3}
+  - {fileID: 8530010831820088792, guid: e52b12e6f7f8e684db4a869b2524f6dd, type: 3}
   - {fileID: 8530010831820088792, guid: e52b12e6f7f8e684db4a869b2524f6dd, type: 3}
   canvasToHide: {fileID: 13227763}
   canvasToShow: {fileID: 210747228}
   game: {fileID: 541798079}
-  baseEnemies: 2
+  baseEnemies: 1
   enemiesPerSecond: 1
   timeBetweenWaves: 5
   difficultyScalingFactor: 0.75
@@ -9062,13 +9064,13 @@ MonoBehaviour:
     cost: 100
     prefab: {fileID: 4229640389886797709, guid: aaa757383c6fcf1409778ab60d1323bd, type: 3}
   - name: Ice Turret
-    cost: 150
+    cost: 200
     prefab: {fileID: 4229640389886797709, guid: d4cd75f3660fc3c42a243e06700f320d, type: 3}
   - name: Plasma Tower
     cost: 300
     prefab: {fileID: 4229640389886797709, guid: d11792e6707dee5498226bf5c76e0810, type: 3}
   - name: Ice Tower
-    cost: 0
+    cost: 200
     prefab: {fileID: 149539630317111982, guid: b38c9b121df317844831b34dcd5de648, type: 3}
 --- !u!114 &911495616
 MonoBehaviour:

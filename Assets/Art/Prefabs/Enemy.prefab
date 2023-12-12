@@ -510,7 +510,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3057472642216837454}
-  moveSpeed: 6
+  moveSpeed: 2
 --- !u!114 &8655131920951707380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,6 +523,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 662f86dced4463640906cdb629469e8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitPoints: 2
+  hitPoints: 8
   currencyWorth: 50
   healthBar: {fileID: 5551276729185246889}

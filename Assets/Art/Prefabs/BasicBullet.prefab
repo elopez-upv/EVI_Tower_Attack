@@ -139,7 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 2755861162978404380}
   explosionPrefab: {fileID: 8462683786976147931, guid: 045674a05344a2c45ac424a6e783eb07, type: 3}
-  bulletSpeed: 1
+  bulletSpeed: 2
   bulletDamage: 1
 --- !u!95 &7913440019257485356
 Animator:

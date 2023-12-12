@@ -374,9 +374,9 @@ MonoBehaviour:
   upgradeUI: {fileID: 6591486845526683426}
   upgradeButton: {fileID: 8287507866884648688}
   rangeArea: {fileID: 5572022809047560813}
-  targetingRange: 4
+  targetingRange: 3
   rotationSpeed: 200
-  bulletsPerSecond: 3
+  bulletsPerSecond: 1
   baseUpgradeCost: 300
 --- !u!1 &5572022809047560813
 GameObject:
