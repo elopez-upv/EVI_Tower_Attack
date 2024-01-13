@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.Video;
 
 public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
@@ -16,7 +17,10 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private Canvas canvasToHide;
     [SerializeField] private Canvas canvasToShow;
     [SerializeField] private GameObject game;
-    
+    [SerializeField] private float delay;
+    [SerializeField] private VideoPlayer videoPlayer;
+
+
     public void Start() {
         canvasToShow.enabled=false;
     }
@@ -38,9 +42,10 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     IEnumerator WaitAndLoadScene() {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(delay);
         canvasToHide.enabled=false;
         canvasToShow.enabled=true;
+        videoPlayer.Play();
         game.SetActive(true);
         EnemySpawner.onGameStart.Invoke();
     }
