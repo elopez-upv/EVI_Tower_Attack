@@ -12,6 +12,7 @@ public class Menu : MonoBehaviour
     private bool isMenuOpen = true;
 
     public void ToggleMenu() {
+        AudioManager.main.PlayButtonClickEffect();
         isMenuOpen = !isMenuOpen;
         anim.SetBool("MenuOpen", isMenuOpen);
     }
