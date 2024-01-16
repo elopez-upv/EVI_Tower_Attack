@@ -21,6 +21,7 @@ public class BuildManager : MonoBehaviour
     }
 
     public void SetSelectedTower(int selectedTower) {
+        AudioManager.main.PlayButtonClickEffect();
         this.selectedTower = selectedTower;
     }
 }

@@ -64,6 +64,7 @@ public class Turret : MonoBehaviour
 
         Bullet bulletScript = bulletObject.GetComponent<Bullet>();
         bulletScript.SetTarget(target);
+        AudioManager.main.PlayShootEffect();
     }
 
     private void FindTarget() {
@@ -96,6 +97,7 @@ public class Turret : MonoBehaviour
     }
 
     public void Upgrade() {
+        AudioManager.main.PlayButtonClickEffect();
         if (CalculateCost() > LevelManager.main.currency) return;
 
         LevelManager.main.SpendCurrency(CalculateCost());
@@ -122,11 +124,11 @@ public class Turret : MonoBehaviour
         return targetingRangeBase * Mathf.Pow(level, 0.4f);
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
-    }
+    // private void OnDrawGizmosSelected()
+    // {
+    //     Handles.color = Color.cyan;
+    //     Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+    // }
 
     private void RefreshVisualRange() {
         float scale = targetingRange / 2.5f;

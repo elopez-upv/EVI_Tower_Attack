@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -12,10 +13,15 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Canvas canvasToShow;
     [SerializeField] private GameObject game;
 
+    [SerializeField] TextMeshProUGUI waveCountDownText;
+    [SerializeField] TextMeshProUGUI waveCounterText;
+    [SerializeField] TextMeshProUGUI enemiesDestroyedText;
+    [SerializeField] TextMeshProUGUI gameOverText;
+
     [Header("Attributes")]
     [SerializeField] private int baseEnemies = 8;
     [SerializeField] private float enemiesPerSecond = 0.5f;
-    [SerializeField] private float timeBetweenWaves = 5f;
+    [SerializeField] private float timeBetweenWaves = 6f;
     [SerializeField] private float difficultyScalingFactor = 0.75f;
     [SerializeField] private float enemiesPerSecondCap = 15f;
 
@@ -31,6 +37,10 @@ public class EnemySpawner : MonoBehaviour
 
     private float actualEnemiesPerSecond;
     private bool isSpawning = false;
+    private bool gameIsStarted = false;
+
+    private float countDown = 0f;
+    private int enemiesDestroyed = 0;
 
     private void Awake() {
         onEnemyDestroy.AddListener(EnemyDestroyed);
@@ -42,8 +52,24 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void Update() {
-        if (!isSpawning) return;
+        enemiesDestroyedText.text = enemiesDestroyed.ToString();
+        if (isSpawning == false && enemiesAlive == 0 && enemiesLeftToSpawn == 0 && gameIsStarted == true) {
+            if (countDown <= 0f) {
+                StartCoroutine(StartWave());
+                countDown = timeBetweenWaves;
+            }
 
+
+            if (countDown < 0f) {
+                countDown = 0f;
+            }
+            waveCountDownText.text = Mathf.Floor(countDown).ToString();
+
+            countDown -= Time.deltaTime;
+        }
+
+        if (!isSpawning) return;
+        
         timeSinceLastSpawn += Time.deltaTime;
 
         if (timeSinceLastSpawn >= (1f / actualEnemiesPerSecond) && enemiesLeftToSpawn > 0) {
@@ -53,34 +79,33 @@ public class EnemySpawner : MonoBehaviour
             timeSinceLastSpawn = 0f;
         }
 
-        if (enemiesAlive == 0 && enemiesLeftToSpawn == 0) {
+        if (enemiesLeftToSpawn == 0) {
             EndWave();
         }
     }
 
     private void EnemyDestroyed() {
         enemiesAlive--;
+        enemiesDestroyed++;
     }
 
     private IEnumerator StartWave() {
-        yield return new WaitForSeconds(timeBetweenWaves);
-
+        waveCounterText.text = currentWave.ToString();
         isSpawning = true;
         enemiesLeftToSpawn = EnemiesPerWave();
-
         actualEnemiesPerSecond = EnemiesPerSecond();
+        yield return new WaitForSeconds(0.5f);
     }
 
     private void EndWave() {
         isSpawning = false;
         timeSinceLastSpawn = 0f;
         currentWave++;
-        StartCoroutine(StartWave());
     }
 
     private void SpawnEnemy() {
         int enemyPrefabIndex;
-        if (currentWave == 1) {
+        if (currentWave < 3) {
             enemyPrefabIndex = 0;
         } else {
             enemyPrefabIndex = Random.Range(0, enemyPrefabs.Length);
@@ -98,9 +123,17 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void GameOver() {
-        isSpawning = false;
-        clearGameItems();
         Debug.Log("Game Ooooover!");
+        gameOverText.gameObject.SetActive(true);
+        isSpawning = false;
+        gameIsStarted = false;
+        StartCoroutine(ClearPreviousGame());
+    }
+
+    private IEnumerator ClearPreviousGame() {
+        yield return new WaitForSeconds(8f);
+        clearGameItems();
+        gameOverText.gameObject.SetActive(false);
         canvasToHide.enabled=false;
         canvasToShow.enabled=true;
         game.SetActive(false);
@@ -122,6 +155,8 @@ public class EnemySpawner : MonoBehaviour
         currentWave = 1;
         timeSinceLastSpawn = 0f;
         LevelManager.main.SetCurrency();
-        StartCoroutine(StartWave());
+        countDown = timeBetweenWaves;
+        enemiesDestroyed = 0;
+        gameIsStarted = true;
     }
 }

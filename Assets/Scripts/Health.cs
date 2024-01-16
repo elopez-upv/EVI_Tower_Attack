@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
         hitPoints -= damage;
 
         healthBar.fillAmount = (float)hitPoints/health;
-
+        AudioManager.main.PlayExplosionEffect();
         if (hitPoints <= 0 && !isDestroyed) {
             EnemySpawner.onEnemyDestroy.Invoke();
             LevelManager.main.IncreaseCurrency(currencyWorth);

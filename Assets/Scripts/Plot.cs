@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Plot : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class Plot : MonoBehaviour
     }
 
     private void OnMouseEnter() {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         sr.color = hoverColor;
     }
 
@@ -26,8 +28,11 @@ public class Plot : MonoBehaviour
     }
 
     private void OnMouseDown() {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
         if(UIManager.main.IsHoveringUI()) return;
 
+        AudioManager.main.PlayButtonClickEffect();
 
         if (towerObj != null) {
             turret.OpenUpgradeUI();
