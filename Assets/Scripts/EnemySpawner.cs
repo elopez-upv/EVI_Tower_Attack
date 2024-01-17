@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private Canvas canvasToHide;
     [SerializeField] private Canvas canvasToShow;
     [SerializeField] private GameObject game;
+    [SerializeField] public AudioSource sourceToStop;
+    [SerializeField] public AudioSource sourceToPlay;
 
     [Header("Attributes")]
     [SerializeField] private int baseEnemies = 8;
@@ -103,6 +105,8 @@ public class EnemySpawner : MonoBehaviour
         Debug.Log("Game Ooooover!");
         canvasToHide.enabled=false;
         canvasToShow.enabled=true;
+        sourceToStop.Stop();
+        sourceToPlay.Play();
         game.SetActive(false);
     }
 

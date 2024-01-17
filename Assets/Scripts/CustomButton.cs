@@ -17,9 +17,6 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     [SerializeField] private Canvas canvasToHide;
     [SerializeField] private Canvas canvasToShow;
     [SerializeField] private GameObject game;
-    [SerializeField] private float delay;
-    [SerializeField] private VideoPlayer videoPlayer;
-
 
     public void Start() {
         canvasToShow.enabled=false;
@@ -42,10 +39,9 @@ public class CustomButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     }
 
     IEnumerator WaitAndLoadScene() {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitForSeconds(1f);
         canvasToHide.enabled=false;
         canvasToShow.enabled=true;
-        videoPlayer.Play();
         game.SetActive(true);
         EnemySpawner.onGameStart.Invoke();
     }

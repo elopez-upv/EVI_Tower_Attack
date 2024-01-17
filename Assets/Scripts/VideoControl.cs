@@ -10,6 +10,7 @@ public class VideoControl : MonoBehaviour
     public Canvas canvasToHide;
     public Canvas canvasToShow;
     public float delay = 2f;
+    public AudioSource source;
 
     void Start()
     {
@@ -28,5 +29,6 @@ public class VideoControl : MonoBehaviour
         // Video terminado, desactivar el primer Canvas y activar el segundo Canvas
         canvasToHide.enabled = false;
         canvasToShow.enabled = true;
+        source.Play();
     }
 }
