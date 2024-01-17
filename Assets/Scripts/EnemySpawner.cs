@@ -136,6 +136,8 @@ public class EnemySpawner : MonoBehaviour
         gameOverText.gameObject.SetActive(false);
         canvasToHide.enabled=false;
         canvasToShow.enabled=true;
+        AudioManager.main.stopGameMusic();
+        AudioManager.main.playBackgroundMusic();
         game.SetActive(false);
     }
 

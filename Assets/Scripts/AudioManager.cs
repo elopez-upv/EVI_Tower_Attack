@@ -9,10 +9,12 @@ public class AudioManager : MonoBehaviour
     [Header("References")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
+    [SerializeField] AudioSource gameMusicSource;
     public AudioClip backgroundMusic;
     public AudioClip shootEffect;
     public AudioClip explosionEffect;
     public AudioClip buttonClickEffect;
+    public AudioClip gameMusic;
 
     private void Awake(){
         main = this;
@@ -20,8 +22,27 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-       musicSource.clip = backgroundMusic; 
-       musicSource.Play();
+        playBackgroundMusic();
+    }
+
+    public void playBackgroundMusic() {
+        musicSource.clip = backgroundMusic; 
+        musicSource.Play();
+    }
+
+    public void playGameMusic() {
+        gameMusicSource.clip = gameMusic; 
+        gameMusicSource.Play();
+    }
+
+    public void stopBacroundMusic() {
+        musicSource.clip = backgroundMusic; 
+        musicSource.Stop();
+    }
+
+    public void stopGameMusic() {
+        gameMusicSource.clip = gameMusic; 
+        gameMusicSource.Stop();
     }
 
     public void PlayShootEffect() {
